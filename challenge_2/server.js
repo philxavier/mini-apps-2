@@ -10,7 +10,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.json());
 
 app.listen(port, () =>
-    console.log('Example app listening on port 3002!'),
+    console.log('App listening on port 3002!'),
 );
 
 app.get('/prices', (req, res) => {
@@ -18,8 +18,10 @@ app.get('/prices', (req, res) => {
     rp.get('https://api.coindesk.com/v1/bpi/historical/close.json?start=2019-04-01&end=2019-04-30')
         .then((data) => {
             console.log('this is data', data)
+            res.send(data);
         })
         .catch((err) => {
             console.log('there was an error', err)
+            res.send.status(404)
         })
 })
