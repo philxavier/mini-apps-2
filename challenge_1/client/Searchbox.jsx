@@ -14,10 +14,12 @@ export default class Searchbox extends Component {
     super(props);
     this.state = {
       inputValue: "",
-      data: []
+      data: [],
+      pageCount: null
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
   }
 
   handleInputChange(e) {
@@ -31,11 +33,30 @@ export default class Searchbox extends Component {
     let query = this.state.inputValue;
     Axios.request({
       method: "get",
-      url: `/events?q=${query}`,
+      url: `events?q=${this.state.inputValue}&_page=1`,
       data: {
         limit: 10
       }
     })
+      .then(data => {
+        console.log("this is data", data);
+        // prettier-ignore
+        let size = Object.values(data.headers).length
+        let dataSize = Object.values(data.headers)[size - 2];
+        this.setState({
+          data: data.data,
+          pageCount: Math.ceil(dataSize / 10)
+        });
+      })
+      .catch(err => {
+        console.log("there was an error", err);
+      });
+  }
+
+  handlePageClick(e) {
+    let page = e.selected + 1;
+    let url = `events?q=${this.state.inputValue}&_page=${page}`;
+    Axios.get(url)
       .then(data => {
         this.setState({
           data: data.data
@@ -47,7 +68,7 @@ export default class Searchbox extends Component {
   }
 
   render() {
-    let { data } = this.state;
+    let { data, pageCount } = this.state;
     return (
       <div id="searchBoxContainer">
         <div id="searchContainer">
@@ -64,19 +85,21 @@ export default class Searchbox extends Component {
         </div>
         <div id="dataContainer">
           {data.length ? <Info data={data} /> : null}
-          <ReactPaginate
-            previousLabel={"previous"}
-            nextLabel={"next"}
-            breakLabel={"..."}
-            breakClassName={"break-me"}
-            pageCount={this.state.pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={this.handlePageClick}
-            containerClassName={"pagination"}
-            subContainerClassName={"pages pagination"}
-            activeClassName={"active"}
-          />
+          {!pageCount ? null : (
+            <ReactPaginate
+              previousLabel={"previous"}
+              nextLabel={"next"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handlePageClick}
+              containerClassName={"pagination"}
+              subContainerClassName={"pages pagination"}
+              activeClassName={"active"}
+            />
+          )}
         </div>
       </div>
     );

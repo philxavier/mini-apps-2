@@ -7,7 +7,7 @@ export default class Info extends Component {
   }
   render() {
     let { data } = this.props;
-    console.log("this is props", data);
+    // console.log("this is props", data);
     return (
       <div>
         {this.props.data.map((ele, ind) => {
