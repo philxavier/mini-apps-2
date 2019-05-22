@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import Test from "./components/Test.jsx";
+import Graph from "./components/Graph.jsx";
 import React from "react";
 
-ReactDOM.render(<Test />, document.getElementById("app"));
+ReactDOM.render(<Graph />, document.getElementById("app"));

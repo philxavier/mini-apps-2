@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
 
-export default class Test extends Component {
+export default class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +40,15 @@ export default class Test extends Component {
 
   render() {
     return (
-      <div style={{ width: "40%", height: "40%" }}>
+      <div
+        style={{
+          width: "40%",
+          height: "40%",
+          margin: "0 auto",
+          textAlign: "center"
+        }}
+      >
+        <h1>Price of Bitcon for April/2019</h1>
         <Line data={this.state.data} options={{ responsive: true }} />
       </div>
     );
