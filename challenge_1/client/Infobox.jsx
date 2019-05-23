@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Info from "./Info.jsx";
-import { Button } from "reactstrap";
-import { Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 export default class Infobox extends Component {
   constructor(props) {
