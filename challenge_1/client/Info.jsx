@@ -5,13 +5,18 @@ import { Form, FormGroup, Label, Input, FormText } from "reactstrap";
 export default class Info extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      textArea: false
+    };
     this.myRef = React.createRef();
 
     this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleEdit(description) {
-    console.log(description);
+    this.setState({
+      textArea: !this.state.textArea
+    });
   }
 
   handleSave() {}
@@ -39,6 +44,14 @@ export default class Info extends Component {
               <Button id="buttonSave" color="info">
                 Save!
               </Button>
+              {!this.state.textArea ? null : (
+                <Form>
+                  <FormGroup>
+                    <Label for="exampleText">Edit the Text</Label>
+                    <Input type="textarea" name="text" id="exampleText" />
+                  </FormGroup>
+                </Form>
+              )}
             </div>
           );
         })}
