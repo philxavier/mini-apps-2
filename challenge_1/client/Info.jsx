@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table } from "reactstrap";
+import { Button } from "reactstrap";
 
 export default class Info extends Component {
   constructor(props) {
@@ -17,6 +17,12 @@ export default class Info extends Component {
               <p>{ele.date}</p>
               <h3>Description</h3>
               <p>{ele.description}</p>
+              <Button id="buttonEdit" color="danger">
+                Edit
+              </Button>
+              <Button id="buttonSave" color="info">
+                Save!
+              </Button>
             </div>
           );
         })}

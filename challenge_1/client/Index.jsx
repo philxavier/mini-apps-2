@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import ReactDOM from "react-dom";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import React from "react";
 // eslint-disable-next-line import/no-named-as-default

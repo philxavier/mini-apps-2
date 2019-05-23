@@ -40,9 +40,6 @@ export default class Searchbox extends Component {
     })
       .then(data => {
         console.log("this is data", data);
-        // prettier-ignore
-        // let size = Object.values(data.headers).length
-        // let dataSize = Object.values(data.headers)[size - 2];
         let dataSize = data.headers["x-total-count"];
         this.setState({
           data: data.data,
