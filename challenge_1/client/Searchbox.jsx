@@ -5,7 +5,7 @@
 import React, { Component } from "react";
 import { InputGroup, InputGroupAddon, Input, Button } from "reactstrap";
 import Axios from "axios";
-import Info from "./Info.jsx";
+import Infobox from "./Infobox.jsx";
 import ReactPaginate from "react-paginate";
 // eslint-disable-next-line react/require-render-returny
 
@@ -82,7 +82,7 @@ export default class Searchbox extends Component {
           <Button onClick={this.handleClick}>Find Fact</Button>
         </div>
         <div id="dataContainer">
-          {data.length ? <Info data={data} /> : null}
+          {data.length ? <Infobox data={data} /> : null}
           {!pageCount ? null : (
             <ReactPaginate
               previousLabel={"previous"}
