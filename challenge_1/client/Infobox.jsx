@@ -13,7 +13,14 @@ export default class Infobox extends Component {
       <div>
         {data.map((ele, ind) => {
           return (
-            <Info key={ind} date={ele.date} description={ele.description} />
+            <Info
+              key={ind}
+              lang={ele.lang}
+              granularity={ele.granularity}
+              category={ele.category1}
+              date={ele.date}
+              description={ele.description}
+            />
           );
         })}
       </div>
