@@ -15,9 +15,10 @@ export default class Keypad extends Component {
     return (
       <div
         style={{
-          marginTop: "12%",
-          float: "right",
-          marginRight: "5%"
+          top: "75%",
+          right: "5%",
+          marginRight: "5%",
+          position: "absolute"
         }}
       >
         <div>

@@ -14,11 +14,10 @@ export default class Main extends Component {
 
   handlePressKey(num) {
     let newBoard = this.state.board.slice();
-    console.log("this is number", num);
-    // newBoard = HelperFuncs.removePins(count, newBoard);
-    // this.setState({
-    //   board: newBoard
-    // });
+    newBoard = HelperFuncs.removePins(num, newBoard);
+    this.setState({
+      board: newBoard
+    });
   }
 
   render() {
