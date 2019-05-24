@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Pin from "./Pin.jsx";
 import Keypad from "./Keypad.jsx";
+import HelperFuncs from "../../HelperFuncs.js";
 
 export default class Main extends Component {
   constructor(props) {
@@ -8,10 +9,22 @@ export default class Main extends Component {
     this.state = {
       board: [[0, 0, 0, 0], [0, 0, 0], [0, 0], [0]]
     };
+    this.handlePressKey = this.handlePressKey.bind(this);
   }
+
+  handlePressKey(num) {
+    let newBoard = this.state.board.slice();
+    console.log("this is number", num);
+    // newBoard = HelperFuncs.removePins(count, newBoard);
+    // this.setState({
+    //   board: newBoard
+    // });
+  }
+
   render() {
     return (
       <div style={{ textAlign: "center", margin: "0" }}>
+        <h1>Start Bowling</h1>
         <div style={{ width: "200px", margin: "0 auto", marginTop: "80px" }}>
           <div>
             {this.state.board[0].map((ele, ind) => {
@@ -34,7 +47,7 @@ export default class Main extends Component {
             })}
           </div>
         </div>
-        <Keypad />
+        <Keypad handlePressKey={this.handlePressKey} />
       </div>
     );
   }

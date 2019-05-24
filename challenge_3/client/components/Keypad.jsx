@@ -10,32 +10,34 @@ export default class Keypad extends Component {
   }
 
   render() {
+    let { handlePressKey } = this.props;
+
     return (
       <div
         style={{
-          marginTop: "17%",
+          marginTop: "12%",
           float: "right",
           marginRight: "5%"
         }}
       >
         <div>
           {this.state.keypad[0].map((ele, ind) => {
-            return <Key number={ele} key={ind} />;
+            return <Key handlePressKey={handlePressKey} num={ele} key={ind} />;
           })}
         </div>
         <div>
           {this.state.keypad[1].map((ele, ind) => {
-            return <Key number={ele} key={ind} />;
+            return <Key handlePressKey={handlePressKey} num={ele} key={ind} />;
           })}
         </div>
         <div>
           {this.state.keypad[2].map((ele, ind) => {
-            return <Key number={ele} key={ind} />;
+            return <Key handlePressKey={handlePressKey} num={ele} key={ind} />;
           })}
         </div>
         <div>
           {this.state.keypad[3].map((ele, ind) => {
-            return <Key number={ele} key={ind} />;
+            return <Key handlePressKey={handlePressKey} num={ele} key={ind} />;
           })}
         </div>
       </div>
