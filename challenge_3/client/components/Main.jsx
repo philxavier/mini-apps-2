@@ -55,7 +55,7 @@ export default class Main extends Component {
   }
 
   render() {
-    let { round, score1, score2 } = this.state;
+    let { round, score1, score2, roundTracker } = this.state;
 
     return (
       <div style={{ textAlign: "center", margin: "0" }}>
@@ -82,7 +82,12 @@ export default class Main extends Component {
             })}
           </div>
         </div>
-        <Scoreboard round={round} score1={score1} score2={score2} />
+        <Scoreboard
+          round={round}
+          score1={score1}
+          score2={score2}
+          roundTracker={roundTracker}
+        />
         <Keypad
           round={round}
           handlePressKey={this.handlePressKey}

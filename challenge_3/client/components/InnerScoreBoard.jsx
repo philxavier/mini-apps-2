@@ -6,29 +6,30 @@ export default class InnerScoreBoard extends Component {
     this.state = {
       score1: null,
       score2: null,
-      total: null,
-      changeController: false
+      total: null
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
     //there has to be a link between the round and the right innerscoreboard
-    let { controlNumber, round, score1, score2 } = this.props;
+    let { controlNumber, round, score1, score2, roundTracker } = this.props;
     if (controlNumber === round) {
       console.log("control number", controlNumber);
-      if (prevProps.score1 !== this.props.score1) {
-        this.setState({
-          score1: score1
-        });
-      } else if (prevProps.score2 !== this.props.score2) {
-        var finalResult = score1 + score2;
-        if (finalResult > 10) {
-          finalResult = 10;
+      if (prevProps.roundTracker !== this.props.roundTracker) {
+        if (roundTracker % 2 !== 0) {
+          this.setState({
+            score1: score1
+          });
+        } else {
+          var finalResult = score1 + score2;
+          if (finalResult > 10) {
+            finalResult = 10;
+          }
+          this.setState({
+            score2: score2,
+            total: finalResult
+          });
         }
-        this.setState({
-          score2: score2,
-          total: finalResult
-        });
       }
     }
   }

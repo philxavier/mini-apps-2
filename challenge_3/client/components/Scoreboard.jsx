@@ -9,11 +9,12 @@ export default class Scoreboard extends Component {
   }
 
   render() {
-    let { score1, score2, round } = this.props;
+    let { score1, score2, round, roundTracker } = this.props;
     let rows = [];
     for (let i = 0; i < 10; i++) {
       rows.push(
         <InnerScoreBoard
+          roundTracker={roundTracker}
           round={round}
           score1={score1}
           score2={score2}
