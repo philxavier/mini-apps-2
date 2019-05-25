@@ -6,11 +6,12 @@ export default class Key extends Component {
     super(props);
   }
   render() {
-    let { handlePressKey, num } = this.props;
+    let { handlePressKey, num, handleRoundChangeAndScore } = this.props;
     return (
       <Button
         onClick={() => {
           handlePressKey(num);
+          handleRoundChangeAndScore(num);
         }}
         variant="contained"
         href="#contained-buttons"

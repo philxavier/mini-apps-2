@@ -2,14 +2,20 @@ import React, { Component } from "react";
 import Pin from "./Pin.jsx";
 import Keypad from "./Keypad.jsx";
 import HelperFuncs from "../../HelperFuncs.js";
+import Scoreboard from "../components/Scoreboard.jsx";
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: [[0, 0, 0, 0], [0, 0, 0], [0, 0], [0]]
+      board: [[0, 0, 0, 0], [0, 0, 0], [0, 0], [0]],
+      round: 0,
+      score1: null,
+      score2: null,
+      roundTracker: 0
     };
     this.handlePressKey = this.handlePressKey.bind(this);
+    this.handleRoundChangeAndScore = this.handleRoundChangeAndScore.bind(this);
   }
 
   handlePressKey(num) {
@@ -20,7 +26,37 @@ export default class Main extends Component {
     });
   }
 
+  handleScoreInsertion(score) {
+    this.setState({
+      currentValue: score
+    });
+  }
+
+  handleRoundChangeAndScore(score) {
+    var newRoundTracker = this.state.roundTracker;
+    if (newRoundTracker % 2 === 0) {
+      newRoundTracker++;
+      this.setState({
+        round: this.state.round + 1,
+        score1: score,
+        roundTracker: newRoundTracker
+      });
+    } else {
+      newRoundTracker++;
+      var reRender = () => {
+        this.setState({
+          score2: score,
+          roundTracker: newRoundTracker,
+          board: [[0, 0, 0, 0], [0, 0, 0], [0, 0], [0]]
+        });
+      };
+      setTimeout(reRender, 200);
+    }
+  }
+
   render() {
+    let { round, score1, score2 } = this.state;
+
     return (
       <div style={{ textAlign: "center", margin: "0" }}>
         <h1>Start Bowling</h1>
@@ -46,7 +82,12 @@ export default class Main extends Component {
             })}
           </div>
         </div>
-        <Keypad handlePressKey={this.handlePressKey} />
+        <Scoreboard round={round} score1={score1} score2={score2} />
+        <Keypad
+          round={round}
+          handlePressKey={this.handlePressKey}
+          handleRoundChangeAndScore={this.handleRoundChangeAndScore}
+        />
       </div>
     );
   }

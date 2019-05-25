@@ -10,7 +10,7 @@ export default class Keypad extends Component {
   }
 
   render() {
-    let { handlePressKey } = this.props;
+    let { handlePressKey, handleRoundChangeAndScore, round } = this.props;
 
     return (
       <div
@@ -23,22 +23,54 @@ export default class Keypad extends Component {
       >
         <div>
           {this.state.keypad[0].map((ele, ind) => {
-            return <Key handlePressKey={handlePressKey} num={ele} key={ind} />;
+            return (
+              <Key
+                handleRoundChangeAndScore={handleRoundChangeAndScore}
+                handlePressKey={handlePressKey}
+                num={ele}
+                key={ind}
+                round={round}
+              />
+            );
           })}
         </div>
         <div>
           {this.state.keypad[1].map((ele, ind) => {
-            return <Key handlePressKey={handlePressKey} num={ele} key={ind} />;
+            return (
+              <Key
+                handleRoundChangeAndScore={handleRoundChangeAndScore}
+                handlePressKey={handlePressKey}
+                num={ele}
+                key={ind}
+                round={round}
+              />
+            );
           })}
         </div>
         <div>
           {this.state.keypad[2].map((ele, ind) => {
-            return <Key handlePressKey={handlePressKey} num={ele} key={ind} />;
+            return (
+              <Key
+                handleRoundChangeAndScore={handleRoundChangeAndScore}
+                handlePressKey={handlePressKey}
+                num={ele}
+                key={ind}
+                round={round}
+              />
+            );
           })}
         </div>
         <div>
           {this.state.keypad[3].map((ele, ind) => {
-            return <Key handlePressKey={handlePressKey} num={ele} key={ind} />;
+            return (
+              <Key
+                handleRoundChangeAndScore={handleRoundChangeAndScore}
+                handlePressKey={handlePressKey}
+                num={ele}
+                key={ind}
+                round={round}
+              />
+            );
           })}
         </div>
       </div>
