@@ -8,14 +8,24 @@ export default class Info extends Component {
     super(props);
     this.state = {
       textArea: false,
-      date: this.props.date,
-      granularity: this.props.granularity,
-      category: this.props.category,
-      lang: this.props.lang,
-      description: this.props.description
+      date: "",
+      granularity: "",
+      category: "",
+      lang: "",
+      description: ""
     };
 
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+  }
+
+  handleChange(e) {
+    let targetProperty = e.target.name;
+    let value = e.target.value;
+    this.setState({
+      [targetProperty]: value
+    });
   }
 
   handleEdit() {
@@ -25,16 +35,28 @@ export default class Info extends Component {
   }
 
   handleSave(description) {
-    Axios.request({
-      method: "get",
-      url: `/events?description=${description}`,
-      data: {
-        limit: 10
-      }
-    }).then(data => {
-      console.log(data);
-    });
+    let paramsForRequest = {};
 
+    for (let key in this.state) {
+      if (key.toString() === "textArea") {
+        continue;
+      }
+      if (this.state[key] === "") {
+        paramsForRequest[key] = this.props[key];
+      } else {
+        paramsForRequest[key] = this.state[key];
+      }
+    }
+
+    // Axios.request({
+    //   method: "get",
+    //   url: `/events?description=${description}`,
+    //   data: {
+    //     limit: 10
+    //   }
+    // }).then(data => {
+    //   console.log(data);
+    // });
     //   GET /posts?title=json-server&author=typicode
   }
 
@@ -68,49 +90,70 @@ export default class Info extends Component {
               <FormGroup>
                 <Label for="Date">Date</Label>
                 <Input
+                  onChange={e => {
+                    this.handleChange(e);
+                  }}
                   type="textArea"
-                  name="text"
+                  name="date"
                   id="exampleDate"
-                  placeholder="date placeholder"
+                  placeholder={date}
+                  value={this.state.date}
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="Granularity">Granularity</Label>
                 <Input
+                  onChange={e => {
+                    this.handleChange(e);
+                  }}
                   type="textArea"
-                  name="text"
+                  name="granularity"
                   id="exampleGranularity"
-                  placeholder="insert a new granularity"
+                  placeholder={granularity}
+                  value={this.state.granularity}
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="Category">Category</Label>
                 <Input
+                  onChange={e => {
+                    this.handleChange(e);
+                  }}
                   type="textArea"
-                  name="text"
+                  name="category"
                   id="exampleGranularity"
                   placeholder="insert a new Category"
+                  value={this.state.category}
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="Language">Language</Label>
                 <Input
+                  onChange={e => {
+                    this.handleChange(e);
+                  }}
                   type="textArea"
-                  name="text"
+                  name="language"
                   id="exampleGranularity"
                   placeholder="insert a new Language"
+                  value={this.state.lang}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="exampleText">Text Area</Label>
+                <Label for="description">Text Area</Label>
                 <Input
+                  onChange={e => {
+                    this.handleChange(e);
+                  }}
                   value={description}
                   type="textarea"
-                  name="text"
+                  name="description"
                   id="exampleText"
                 />
               </FormGroup>
-              <Button color="secondary">Submit</Button>
+              <Button onClick={this.handleSave} color="warning">
+                Submit
+              </Button>
             </Form>
           )}
         </div>

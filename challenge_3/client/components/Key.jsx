@@ -12,6 +12,7 @@ export default class Key extends Component {
         onClick={() => {
           handlePressKey(num);
           handleRoundChangeAndScore(num);
+
         }}
         variant="contained"
         href="#contained-buttons"

@@ -10,7 +10,7 @@ export default class Keypad extends Component {
   }
 
   render() {
-    let { handlePressKey, handleRoundChangeAndScore, round } = this.props;
+    let { handlePressKey, handleRoundChangeAndScore, roundTracker } = this.props;
 
     return (
       <div
@@ -29,7 +29,7 @@ export default class Keypad extends Component {
                 handlePressKey={handlePressKey}
                 num={ele}
                 key={ind}
-                round={round}
+                roundTracker={roundTracker}
               />
             );
           })}
@@ -42,7 +42,7 @@ export default class Keypad extends Component {
                 handlePressKey={handlePressKey}
                 num={ele}
                 key={ind}
-                round={round}
+                roundTracker={roundTracker}
               />
             );
           })}
@@ -55,7 +55,7 @@ export default class Keypad extends Component {
                 handlePressKey={handlePressKey}
                 num={ele}
                 key={ind}
-                round={round}
+                roundTracker={roundTracker}
               />
             );
           })}
@@ -68,7 +68,7 @@ export default class Keypad extends Component {
                 handlePressKey={handlePressKey}
                 num={ele}
                 key={ind}
-                round={round}
+                roundTracker={roundTracker}
               />
             );
           })}

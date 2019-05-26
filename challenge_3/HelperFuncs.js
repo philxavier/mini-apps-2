@@ -1,7 +1,6 @@
 let removePins = (count, newBoard) => {
 
     var result = newBoard
-    console.log(count)
     var lengthOfEntireArray = newBoard.length
     for (let i = lengthOfEntireArray - 1; i >= 0; i--) {
         var currentItem = newBoard[i]
@@ -17,10 +16,11 @@ let removePins = (count, newBoard) => {
             }
         }
     }
-    console.log(result)
     return result
 }
 
+
 module.exports = {
-    removePins
+    removePins,
+   
 }

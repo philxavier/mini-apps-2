@@ -12,10 +12,12 @@ export default class Main extends Component {
       round: 0,
       score1: null,
       score2: null,
-      roundTracker: 0
+      roundTracker: 0,
+      totalScore: 0
     };
     this.handlePressKey = this.handlePressKey.bind(this);
     this.handleRoundChangeAndScore = this.handleRoundChangeAndScore.bind(this);
+    this.handleRestartGame = this.handleRestartGame.bind(this);
   }
 
   handlePressKey(num) {
@@ -34,25 +36,50 @@ export default class Main extends Component {
 
   handleRoundChangeAndScore(score) {
     var newRoundTracker = this.state.roundTracker;
+    var newTotalScore = this.state.totalScore + score;
+
     if (newRoundTracker % 2 === 0) {
       newRoundTracker++;
       this.setState({
         round: this.state.round + 1,
         score1: score,
-        roundTracker: newRoundTracker
-      });
+        roundTracker: newRoundTracker,
+        totalScore: newTotalScore
+      })
     } else {
       newRoundTracker++;
+      console.log('im hereeeeeeeeeeeeee')
       var reRender = () => {
         this.setState({
           score2: score,
           roundTracker: newRoundTracker,
+          totalScore: newTotalScore,
           board: [[0, 0, 0, 0], [0, 0, 0], [0, 0], [0]]
-        });
-      };
-      setTimeout(reRender, 200);
-    }
+        }, () => {
+          if (this.state.roundTracker === 20) {
+            console.log(this.state.totalScore)
+            setTimeout(() => {
+              alert("Game Over! The total score is " + this.state.totalScore);
+              this.handleRestartGame()
+            },300)
+          }
+        })
+      }
+      setTimeout(reRender, 300)  
+    };
   }
+
+  handleRestartGame() {
+    this.setState({
+      board: [[0, 0, 0, 0], [0, 0, 0], [0, 0], [0]],
+      round: 0,
+      score1: null,
+      score2: null,
+      roundTracker: 0,
+      totalScore: 0
+    });
+  }
+
 
   render() {
     let { round, score1, score2, roundTracker } = this.state;
@@ -89,7 +116,7 @@ export default class Main extends Component {
           roundTracker={roundTracker}
         />
         <Keypad
-          round={round}
+          roundTracker={roundTracker}
           handlePressKey={this.handlePressKey}
           handleRoundChangeAndScore={this.handleRoundChangeAndScore}
         />
