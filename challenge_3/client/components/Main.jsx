@@ -45,28 +45,29 @@ export default class Main extends Component {
         score1: score,
         roundTracker: newRoundTracker,
         totalScore: newTotalScore
-      })
+      });
     } else {
       newRoundTracker++;
-      console.log('im hereeeeeeeeeeeeee')
       var reRender = () => {
-        this.setState({
-          score2: score,
-          roundTracker: newRoundTracker,
-          totalScore: newTotalScore,
-          board: [[0, 0, 0, 0], [0, 0, 0], [0, 0], [0]]
-        }, () => {
-          if (this.state.roundTracker === 20) {
-            console.log(this.state.totalScore)
-            setTimeout(() => {
-              alert("Game Over! The total score is " + this.state.totalScore);
-              this.handleRestartGame()
-            },300)
+        this.setState(
+          {
+            score2: score,
+            roundTracker: newRoundTracker,
+            totalScore: newTotalScore,
+            board: [[0, 0, 0, 0], [0, 0, 0], [0, 0], [0]]
+          },
+          () => {
+            if (this.state.roundTracker === 20) {
+              setTimeout(() => {
+                alert("Game Over! The total score is " + this.state.totalScore);
+                this.handleRestartGame();
+              }, 300);
+            }
           }
-        })
-      }
-      setTimeout(reRender, 300)  
-    };
+        );
+      };
+      setTimeout(reRender, 300);
+    }
   }
 
   handleRestartGame() {
@@ -79,7 +80,6 @@ export default class Main extends Component {
       totalScore: 0
     });
   }
-
 
   render() {
     let { round, score1, score2, roundTracker } = this.state;

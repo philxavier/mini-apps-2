@@ -13,6 +13,7 @@ export default class InnerScoreBoard extends Component {
   componentDidUpdate(prevProps, prevState) {
     //there has to be a link between the round and the right innerscoreboard
     let { controlNumber, round, score1, score2, roundTracker } = this.props;
+
     if (controlNumber === round) {
       if (prevProps.roundTracker !== this.props.roundTracker) {
         if (roundTracker % 2 !== 0) {
@@ -30,6 +31,18 @@ export default class InnerScoreBoard extends Component {
           });
         }
       }
+    }
+
+    let reRenderInnerScore = () => {
+      this.setState({
+        score1: null,
+        score2: null,
+        total: null
+      });
+    };
+
+    if (roundTracker === 20) {
+      setTimeout(reRenderInnerScore, 200);
     }
   }
 
