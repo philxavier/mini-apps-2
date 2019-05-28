@@ -9,7 +9,7 @@ export default class Scoreboard extends Component {
   }
 
   render() {
-    let { score1, score2, round, roundTracker } = this.props;
+    let { score1, score2, round, roundTracker, totalScore } = this.props;
     let rows = [];
     for (let i = 0; i < 10; i++) {
       rows.push(
@@ -20,6 +20,7 @@ export default class Scoreboard extends Component {
           score2={score2}
           key={i}
           controlNumber={i + 1}
+          totalScore={totalScore}
         />
       );
     }

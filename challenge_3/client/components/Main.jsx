@@ -13,7 +13,8 @@ export default class Main extends Component {
       score1: null,
       score2: null,
       roundTracker: 0,
-      totalScore: 0
+      totalScore: 0,
+      temporaryScore: 0
     };
     this.handlePressKey = this.handlePressKey.bind(this);
     this.handleRoundChangeAndScore = this.handleRoundChangeAndScore.bind(this);
@@ -36,6 +37,14 @@ export default class Main extends Component {
 
   handleRoundChangeAndScore(score) {
     var newRoundTracker = this.state.roundTracker;
+    debugger;
+
+    if (newRoundTracker % 2 !== 0) {
+      if (score + this.state.score1 > 10) {
+        score = 10 - this.state.score1;
+      }
+    }
+
     var newTotalScore = this.state.totalScore + score;
 
     if (newRoundTracker % 2 === 0) {
@@ -54,7 +63,8 @@ export default class Main extends Component {
             score2: score,
             roundTracker: newRoundTracker,
             totalScore: newTotalScore,
-            board: [[0, 0, 0, 0], [0, 0, 0], [0, 0], [0]]
+            board: [[0, 0, 0, 0], [0, 0, 0], [0, 0], [0]],
+            temporaryScore: 0
           },
           () => {
             if (this.state.roundTracker === 20) {
@@ -82,7 +92,7 @@ export default class Main extends Component {
   }
 
   render() {
-    let { round, score1, score2, roundTracker } = this.state;
+    let { round, score1, score2, roundTracker, totalScore } = this.state;
 
     return (
       <div style={{ textAlign: "center", margin: "0" }}>
@@ -110,6 +120,7 @@ export default class Main extends Component {
           </div>
         </div>
         <Scoreboard
+          totalScore={totalScore}
           round={round}
           score1={score1}
           score2={score2}

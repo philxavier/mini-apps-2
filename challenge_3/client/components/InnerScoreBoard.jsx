@@ -6,13 +6,21 @@ export default class InnerScoreBoard extends Component {
     this.state = {
       score1: null,
       score2: null,
-      total: null
+      total: null,
+      totalScore: null
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
     //there has to be a link between the round and the right innerscoreboard
-    let { controlNumber, round, score1, score2, roundTracker } = this.props;
+    let {
+      controlNumber,
+      round,
+      score1,
+      score2,
+      roundTracker,
+      totalScore
+    } = this.props;
 
     if (controlNumber === round) {
       if (prevProps.roundTracker !== this.props.roundTracker) {
@@ -27,7 +35,7 @@ export default class InnerScoreBoard extends Component {
           }
           this.setState({
             score2: score2,
-            total: finalResult
+            totalScore: totalScore
           });
         }
       }
@@ -37,7 +45,7 @@ export default class InnerScoreBoard extends Component {
       this.setState({
         score1: null,
         score2: null,
-        total: null
+        totalScore: null
       });
     };
 
@@ -47,7 +55,7 @@ export default class InnerScoreBoard extends Component {
   }
 
   render() {
-    let { score1, score2, total } = this.state;
+    let { score1, score2, totalScore } = this.state;
     return (
       <div
         style={{
@@ -59,7 +67,7 @@ export default class InnerScoreBoard extends Component {
       >
         <div>{score1 ? score1 : null}</div>
         <div>{score2 ? score2 : null}</div>
-        <div>{total ? total : null}</div>
+        <div>{totalScore ? totalScore : null}</div>
       </div>
     );
   }
